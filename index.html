@@ -16,7 +16,7 @@
             font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
-            overflow: hidden; /* Để fullScroll hoạt động */
+             overflow: hidden; /*Để fullScroll hoạt động */
             background: #E0D7D3; /* Màu chủ đạo sáng */
             color: #26221A; /* Màu chủ đạo tối */
         }
@@ -24,12 +24,13 @@
             height: 100vh;
         }
         section {
-            height: 100vh;
+            height: 100vh!important;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 80px 20px 20px 20px; /* Padding top 80px */
+            padding: 250px 20px 20px 20px;
+            box-sizing: border-box;
             background: #E0D7D3; /* Màu chủ đạo sáng */
             color: #26221A; /* Màu chủ đạo tối */
         }
@@ -56,27 +57,38 @@
             font-size: 14px;
             padding: 5px 10px;
             border-radius: 20px;
-            transition: background 0.3s, color 0.3s;
+            transition: all 0.3s ease; /* Transition mượt cho hover/active */
         }
         .menu a:hover {
             background: rgba(38, 34, 26, 0.2); /* Hover tối hơn */
             color: #26221A;
+            transform: scale(1.05); /* Scale nhẹ khi hover */
         }
         .menu a.active {
             background: #26221A; /* Active background tối */
             color: #E0D7D3; /* Active text sáng */
             border: 1px solid #E0D7D3; /* Viền sáng để nổi bật */
+            transform: scale(1.05); /* Scale nhẹ khi active */
         }
         .content {
             max-width: 900px;
             margin: 0 auto;
         }
-        .profile-img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            margin-bottom: 20px;
-            border: 2px solid #26221A; /* Khung với màu tối */
+        /* Layout đặc biệt cho About: 2 cột */
+        .about-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 40px; /* Khoảng cách giữa ảnh và text */
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .about-img {
+            flex: 0 0 200px; /* Ảnh cố định width 200px */
+        }
+        .about-text {
+            flex: 1; /* Text chiếm phần còn lại */
+            text-align: left; /* Căn trái cho text */
         }
         .project-img {
             width: 100%;
@@ -142,6 +154,17 @@
                 max-width: 100%; /* Fit màn hình */
                 padding: 0 10px; /* Padding nội dung nhỏ hơn */
             }
+            .about-content {
+                flex-direction: column; /* Stack vertical trên mobile */
+                gap: 20px; /* Gap nhỏ hơn */
+                text-align: center; /* Căn giữa trên mobile */
+            }
+            .about-img {
+                flex: none; /* Không cố định width */
+            }
+            .about-text {
+                text-align: center; /* Căn giữa text trên mobile */
+            }
             .profile-img {
                 width: 120px; /* Ảnh nhỏ hơn */
                 height: 120px;
@@ -182,55 +205,78 @@
     <div id="fullpage">
         <!-- Section 1: About -->
         <section id="about" class="section">
-            <div class="content">
-                <img src="https://via.placeholder.com/300x300" alt="Ảnh chân dung" class="profile-img" data-aos="fade-up">
-                <h1 data-aos="fade-up" data-aos-delay="200">LÊ NGUYỄN HOÀNG MINH</h1>
-                <h2 data-aos="fade-up" data-aos-delay="400">PHP INTERN</h2>
-                <p data-aos="fade-up" data-aos-delay="600">Trong thời gian học đại học, tôi đã tích lũy kinh nghiệm lập trình PHP, làm việc nhóm hiệu quả, và khả năng học hỏi nhanh. Tôi định hướng nghề nghiệp trở thành một lập trình viên backend chuyên nghiệp, tập trung vào phát triển ứng dụng web với Laravel.</p>
-                <h3 data-aos="fade-up" data-aos-delay="800">Kỹ năng chính:</h3>
-                <p data-aos="fade-up" data-aos-delay="1000">Programming Languages: PHP, C++, HTML/CSS, JavaScript<br>
-                Frameworks: Laravel<br>
-                Databases: MySQL, SQL Server<br>
-                Tools: Git, Postman, Visual Studio Code<br>
-                Soft Skills: Teamwork, Time Management, Problem Solving</p>
+            <div class="about-content">
+                <div class="about-img" data-aos="fade-up">
+                    <img src="/assets/img/Avatar.png" alt="Ảnh chân dung" class="profile-img">
+                </div>
+                <div class="about-text">
+                    <h1 data-aos="fade-up" data-aos-delay="200">LÊ NGUYỄN HOÀNG MINH</h1>
+                    <h2 data-aos="fade-up" data-aos-delay="400">PHP INTERN</h2>
+                    <p data-aos="fade-up" data-aos-delay="600">During my time at university, I gained experience in PHP programming, effective teamwork, and quick learning ability. My career goal is to become a professional backend developer, focusing on building web applications using the framework.</p>
+                    <h3 data-aos="fade-up" data-aos-delay="800">Kỹ năng chính:</h3>
+                    <p data-aos="fade-up" data-aos-delay="1000">Programming Languages: PHP, C++, HTML/CSS, JavaScript<br>
+                    Frameworks: Laravel<br>
+                    Databases: MySQL, SQL Server<br>
+                    Tools: Git, Postman, Visual Studio Code<br>
+                    Soft Skills: Teamwork, Time Management, Problem Solving</p>
+                </div>
             </div>
         </section>
 
         <!-- Section 2: Project 1 -->
         <section id="project1" class="section">
-            <div class="content">
+            <div class="content" style="max-width: 1000px; margin: 0 auto;">
                 <h2>Nhóm Tin An Lành – Article Management and Community Website</h2>
-                <div class="project-grid">
-                    <img src="https://via.placeholder.com/400x300" alt="Ảnh dự án 1 - Giao diện" class="project-img">
-                    <img src="https://via.placeholder.com/400x300" alt="Ảnh dự án 1 - Code" class="project-img">
+                <div style="display: flex; align-items: center; gap: 40px; flex-wrap: wrap;">
+                    
+                    <!-- Ảnh bên phải -->
+                    <div style="flex: 1; min-width: 300px;">
+                        <img src="https://via.placeholder.com/400x300" alt="Ảnh dự án 1 - Giao diện" class="project-img" style="margin-bottom: 20px;">
+                        <img src="https://via.placeholder.com/400x300" alt="Ảnh dự án 1 - Code" class="project-img">
+                    </div>
+                    <!-- Text bên trái -->
+                    <div style="flex: 1; min-width: 300px; text-align: left;">
+                        <p><strong>Description:</strong> Trang quản lý bài viết và chia sẻ thông tin cộng đồng.</p>
+                        <p><strong>Responsibilities:</strong></p>
+                        <ul>
+                            <li>Thiết kế giao diện website bằng HTML/CSS.</li>
+                            <li>Phát triển chức năng quản lý bài viết bằng PHP/Laravel.</li>
+                            <li>Sử dụng MySQL để lưu trữ dữ liệu.</li>
+                        </ul>
+                        <p>
+                            <a href="#" class="btn btn-outline-dark" target="_blank" style="margin-right: 10px;">Live Demo</a>
+                            <a href="#" class="btn btn-outline-dark" target="_blank">Source Code</a>
+                        </p>
+                    </div>
                 </div>
-                <p><strong>Description:</strong> Trang quản lý bài viết và chia sẻ thông tin cộng đồng.</p>
-                <p><strong>Responsibilities:</strong></p>
-                <ul style="text-align: left; display: inline-block;">
-                    <li>Thiết kế giao diện website bằng HTML/CSS.</li>
-                    <li>Phát triển chức năng quản lý bài viết bằng PHP/Laravel.</li>
-                    <li>Sử dụng MySQL để lưu trữ dữ liệu.</li>
-                </ul>
-                <a href="#" class="btn btn-outline-dark mt-3">Xem dự án</a>
             </div>
         </section>
 
         <!-- Section 3: Project 2 -->
         <section id="project2" class="section">
-            <div class="content">
+            <div class="content" style="max-width: 1000px; margin: 0 auto;">
                 <h2>GestiMI – Gas Customer Management System</h2>
-                <div class="project-grid">
-                    <img src="https://via.placeholder.com/400x300" alt="Ảnh dự án 2 - Giao diện" class="project-img">
-                    <img src="https://via.placeholder.com/400x300" alt="Ảnh dự án 2 - Code" class="project-img">
+                <div style="display: flex; align-items: center; gap: 40px; flex-wrap: wrap;">
+                    <!-- Ảnh bên trái -->
+                    <div style="flex: 1; min-width: 300px;">
+                        <img src="https://via.placeholder.com/400x300" alt="Ảnh dự án 2 - Giao diện" class="project-img" style="margin-bottom: 20px;">
+                        <img src="https://via.placeholder.com/400x300" alt="Ảnh dự án 2 - Code" class="project-img">
+                    </div>
+                    <!-- Text bên phải -->
+                    <div style="flex: 1; min-width: 300px; text-align: left;">
+                        <p><strong>Description:</strong> Ứng dụng web quản lý khách hàng gas.</p>
+                        <p><strong>Responsibilities:</strong></p>
+                        <ul>
+                            <li>Thiết kế và phát triển module quản lý khách hàng.</li>
+                            <li>Sử dụng PHP và Laravel Framework.</li>
+                            <li>Thực hiện kiểm thử chức năng và tối ưu hiệu suất hệ thống.</li>
+                        </ul>
+                        <p>
+                            <a href="#" class="btn btn-outline-dark" target="_blank" style="margin-right: 10px;">Live Demo</a>
+                            <a href="#" class="btn btn-outline-dark" target="_blank">Source Code</a>
+                        </p>
+                    </div>
                 </div>
-                <p><strong>Description:</strong> Ứng dụng web quản lý khách hàng gas.</p>
-                <p><strong>Responsibilities:</strong></p>
-                <ul style="text-align: left; display: inline-block;">
-                    <li>Thiết kế và phát triển module quản lý khách hàng.</li>
-                    <li>Sử dụng PHP và Laravel Framework.</li>
-                    <li>Thực hiện kiểm thử chức năng và tối ưu hiệu suất hệ thống.</li>
-                </ul>
-                <a href="#" class="btn btn-outline-dark mt-3">Xem dự án</a>
             </div>
         </section>
 
@@ -280,12 +326,13 @@
             once: true
         });
 
-        // Khởi tạo fullPage với easing mượt hơn
+        // Khởi tạo fullPage với easing và speed mượt hơn
         new fullpage('#fullpage', {
             autoScrolling: true,
-            scrollHorizontally: true,
+            // scrollHorizontally: true,
             navigation: false,
             easingcss3: 'ease-out',
+            scrollingSpeed: 1000, // Speed cuộn mượt
             anchors: ['about', 'project1', 'project2', 'experience', 'contact'],
             afterLoad: function(origin, destination, direction) {
                 // Remove active class từ tất cả menu items
@@ -296,6 +343,9 @@
                     activeMenu.classList.add('active');
                 }
             }
+        });
+        window.addEventListener('resize', () => {
+            fullpage_api.reBuild();
         });
 
         // Menu click để cuộn
